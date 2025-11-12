@@ -1,0 +1,48 @@
+<form class="dialog-form" [formGroup]="form" (ngSubmit)="submit()">
+  <h2 mat-dialog-title class="dialog-title">{{ title }}</h2>
+
+  <mat-dialog-content class="dialog-content">
+    <div class="field-row">
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Firstname *</mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error *ngIf="form.controls.firstName.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="form.controls.firstName.hasError('maxlength')">
+          Maximum 50 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Lastname *</mat-label>
+        <input matInput formControlName="lastName" />
+        <mat-error *ngIf="form.controls.lastName.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="form.controls.lastName.hasError('maxlength')">
+          Maximum 50 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Choose date of birth *</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi></mat-datepicker>
+        <mat-error *ngIf="form.controls.dob.hasError('required')">Required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <span class="required-hint">* Required</span>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center" class="dialog-actions">
+    <button mat-flat-button type="button" mat-dialog-close class="cancel-button">Cancel</button>
+    <button
+      mat-flat-button
+      color="accent"
+      type="submit"
+      class="submit-button"
+      [disabled]="form.invalid"
+    >
+      {{ submitLabel }}
+    </button>
+  </mat-dialog-actions>
+</form>

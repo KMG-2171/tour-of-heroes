@@ -1,0 +1,37 @@
+.dialog-confirmation{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  background: #3f3b46;
+  padding: 24px 32px 16px;
+  color: #ffffff;
+  align-items: center;
+}
+
+.dialog-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0 0 16px;
+  color: #ffffff;
+}
+
+.dialog-content {
+  color: #ffffff;
+}
+
+mat-dialog-actions {
+  margin-top: 12px;
+}
+
+.confirm-button {
+  background: linear-gradient(90deg, #d72edd 0%, #ff4fd3 100%);
+  color: #ffffff;
+  min-width: 120px;
+}
+
+.confirm-button:disabled {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.5);
+}

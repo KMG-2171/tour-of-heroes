@@ -1,0 +1,68 @@
+<section class="members-shell">
+  <header class="members-header">
+    <h1>Accounts</h1>
+
+    <div class="header-actions">
+      <button mat-flat-button color="accent" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+    </div>
+  </header>
+
+  <mat-progress-bar *ngIf="loading$ | async" color="accent" mode="indeterminate"></mat-progress-bar>
+
+  <p class="error-banner" *ngIf="error$ | async as error">{{ error }}</p>
+
+  <p class="summary" *ngIf="members$ | async as members">
+    Total accounts: {{ members.length }}
+  </p>
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Account Id</th>
+        <td mat-cell *matCellDef="let member">{{ member.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let member">{{ member.firstName }} {{ member.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dob">
+        <th mat-header-cell *matHeaderCellDef>Date of birth</th>
+        <td mat-cell *matCellDef="let member">{{ member.dob | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let member">
+          <button
+            mat-raised-button
+            color="primary"
+            class="edit-button"
+            (click)="openEditDialog(member)"
+            matTooltip="Edit account"
+          >
+            Edit
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            color="warn"
+            aria-label="Delete account"
+            (click)="confirmDelete(member)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</section>
+
